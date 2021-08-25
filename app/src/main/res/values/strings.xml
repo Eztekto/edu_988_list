@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">seconndApp</string>
+    <string name="app_name">secondApp</string>
+    <string name="add_user_btn">Добавить пользователя</string>
 </resources>
