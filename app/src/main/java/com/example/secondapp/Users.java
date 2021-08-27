@@ -27,7 +27,9 @@ public class Users {
 
     public void updateUser(User user){
         ContentValues values = getContentValues(user);
-        database.update(UserDbSchema.UserTable.NAME, values, UserDbSchema.Cols.UUID + "='" + user.getUuid() + "'", null);
+        String stringUuid = user.getUuid().toString();
+        database.update(UserDbSchema.UserTable.NAME, values, UserDbSchema.Cols.UUID + "=?",
+                new String[]{stringUuid});
     }
 
     public void deleteUser(UUID uuid){
