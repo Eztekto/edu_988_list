@@ -31,7 +31,9 @@ public class Users {
     }
 
     public void deleteUser(UUID uuid){
-        database.delete(UserDbSchema.UserTable.NAME, UserDbSchema.Cols.UUID + "='" + uuid + "'", null);
+        String stringUuid = uuid.toString();
+        database.delete(UserDbSchema.UserTable.NAME, UserDbSchema.Cols.UUID + "=?",
+                new String[]{stringUuid});
 
     }
 
