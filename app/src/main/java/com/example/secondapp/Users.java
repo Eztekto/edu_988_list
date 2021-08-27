@@ -26,10 +26,13 @@ public class Users {
     }
 
     public void updateUser(User user){
-        // Реализуем изменение данных
+        ContentValues values = getContentValues(user);
+        database.update(UserDbSchema.UserTable.NAME, values, UserDbSchema.Cols.UUID + "='" + user.getUuid() + "'", null);
     }
+
     public void deleteUser(UUID uuid){
-        // Отправляем запрос на удаление пользователя по его UUID
+        database.delete(UserDbSchema.UserTable.NAME, UserDbSchema.Cols.UUID + "='" + uuid + "'", null);
+
     }
 
     private static ContentValues getContentValues(User user){
@@ -60,12 +63,7 @@ public class Users {
         }finally {
             cursorWrapper.close();
         }
-        /*for (int i = 0; i < 100; i++) {
-            User user = new User();
-            user.setUserName("Пользователь "+i);
-            user.setUserLastName("Фамилия "+i);
-            userList.add(user);
-        }*/
+
         return this.userList;
     }
 }

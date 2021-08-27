@@ -1,4 +1,4 @@
-package com.example.seconndapp;
+package com.example.secondapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

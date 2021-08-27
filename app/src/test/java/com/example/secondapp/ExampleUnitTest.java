@@ -1,4 +1,4 @@
-package com.example.seconndapp;
+package com.example.secondapp;
 
 import org.junit.Test;
 
