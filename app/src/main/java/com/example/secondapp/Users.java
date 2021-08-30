@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.secondapp.database.UserBaseHelper;
 import com.example.secondapp.database.UserDbSchema;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -21,25 +25,50 @@ public class Users {
     }
 
     public void addUser(User user){
+        /*String host = "http://0988.vozhzhaev.ru/handlerAddUser.php?name="+user.getUserName()+"&lastname="+user.getUserLastName()+"&phone="+user.getPhone()+"&uuid="+user.getUuid().toString();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(host);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    InputStream is = urlConnection.getInputStream();
+                    InputStreamReader reader = new InputStreamReader(is);
+                    int i;
+                    StringBuilder result = new StringBuilder();
+                    while ((i=reader.read()) != -1){
+                        result.append((char)i);
+                    }
+                    System.out.println(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Thread t = new Thread(runnable);
+        t.start();*/
         ContentValues values = getContentValues(user);
         database.insert(UserDbSchema.UserTable.NAME, null, values);
     }
 
     public void updateUser(User user){
+        // Реализуем изменение данных
         ContentValues values = getContentValues(user);
         String stringUuid = user.getUuid().toString();
-        database.update(UserDbSchema.UserTable.NAME, values, UserDbSchema.Cols.UUID + "=?",
+        database.update(UserDbSchema.UserTable.NAME,
+                values,
+                UserDbSchema.Cols.UUID+"=?",
                 new String[]{stringUuid});
     }
-
     public void deleteUser(UUID uuid){
+        // Отправляем запрос на удаление пользователя по его UUID
         String stringUuid = uuid.toString();
-        database.delete(UserDbSchema.UserTable.NAME, UserDbSchema.Cols.UUID + "=?",
+        database.delete(UserDbSchema.UserTable.NAME,
+                UserDbSchema.Cols.UUID+"=?",
                 new String[]{stringUuid});
-
     }
 
-    private static ContentValues getContentValues(User user){
+    private ContentValues getContentValues(User user){
         ContentValues values = new ContentValues();
         values.put(UserDbSchema.Cols.UUID, user.getUuid().toString());
         values.put(UserDbSchema.Cols.USERNAME, user.getUserName());
@@ -67,7 +96,12 @@ public class Users {
         }finally {
             cursorWrapper.close();
         }
-
+        /*for (int i = 0; i < 100; i++) {
+            User user = new User();
+            user.setUserName("Пользователь "+i);
+            user.setUserLastName("Фамилия "+i);
+            userList.add(user);
+        }*/
         return this.userList;
     }
 }
