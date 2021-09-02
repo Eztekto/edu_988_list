@@ -32,23 +32,20 @@ public class UserInfoFragment extends Fragment {
         phoneTextView.setText(user.getPhone());
         editUserDataBtn = view.findViewById(R.id.editUserDataBtn);
         deleteUserBtn = view.findViewById(R.id.deleteUserBtn);
-        editUserDataBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddUserActivity.class);
-                intent.putExtra("user", user);
-                startActivity(intent);
-                // Открываем активность для редактирования пользователя
-                // На активность нужно передать данные пользователя (Используйте сериализацию)
-                // На активности реализуем возможность изменить данные пользователя
-            }
-        });
+
+
         deleteUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Users users = new Users(getActivity());
                 users.deleteUser(user.getUuid());
-                //onBackPressed();
+                getActivity().onBackPressed();
+            }
+        });
+        editUserDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.editFragment(view, user);
             }
         });
         return view;

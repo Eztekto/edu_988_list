@@ -52,4 +52,30 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
+
+    public static void addFragment(View view) {
+        //Получаем хостинговую активность
+        FragmentActivity activity = (FragmentActivity) view.getContext();
+        //Создаём  фрагмент менеджер
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        //Создаём сам фрагмент
+        Fragment fragment = new UserAddFragment();
+        //Показываем сам фрагмент
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+    public static void editFragment(View view, User user) {
+        //Получаем хостинговую активность
+        FragmentActivity activity = (FragmentActivity) view.getContext();
+        //Создаём  фрагмент менеджер
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        //Создаём сам фрагмент
+        Fragment fragment = new UserEditFragment();
+        //создаём Bundle (это как коллекция)
+        Bundle bundle = new Bundle();
+        //Записываем пользователя в bundle
+        bundle.putSerializable("user", user);
+        //Добавляем bundle к фрагменту
+        fragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
 }

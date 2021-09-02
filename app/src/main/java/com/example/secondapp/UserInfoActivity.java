@@ -1,3 +1,4 @@
+
 package com.example.secondapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,7 @@ public class UserInfoActivity extends AppCompatActivity {
         editUserDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UserInfoActivity.this, EditActivity.class);
+                Intent intent = new Intent(UserInfoActivity.this, UserEditFragment.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
             }
@@ -41,6 +42,12 @@ public class UserInfoActivity extends AppCompatActivity {
                 users.deleteUser(user.getUuid());
                 onBackPressed();
 
+            }
+        });
+        editUserDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.editFragment(view, user);//открываем фрагмент редактирования данных пользователя
             }
         });
     }

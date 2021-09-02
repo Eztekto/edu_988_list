@@ -29,7 +29,7 @@ public class UserListFragment extends Fragment {
         addUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddUserActivity.class);
+                Intent intent = new Intent(getContext(), UserAddFragment.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +65,7 @@ public class UserListFragment extends Fragment {
         public void onClick(View view) {
             Intent intent = new Intent(getContext(), UserPagerActivity.class);
             startActivity(intent);
-            //MainActivity.changeFragment(view, user);
+            MainActivity.changeFragment(view, user);
         }
     }
 

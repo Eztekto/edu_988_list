@@ -1,3 +1,4 @@
+
 package com.example.secondapp;
 
 import androidx.appcompat.app.AppCompatActivity;
